@@ -1,0 +1,28 @@
+{% load static %}
+   <!DOCTYPE html>
+   <html>
+   <head>
+     <title>{% block title %}{% endblock %}</title>
+     <link href="{% static 'blogapp/css/main.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{% static 'blogapp/images/logo2.jpg' %}">
+   </head>
+   <body>
+     <div id="content">
+       {% block content %}
+       {% endblock %}
+     </div>
+     <div id="sidebar">
+      <h2><a class="nav-item nav-link" href="{% url 'blogapp:post_list' %}">DataBlog</a></h2>
+      <p>Welcome to data blog.</p>
+       <hr>
+       <p class="text-muted"> You can put any information here ranging from sports to fashion to religion to tech to many more.
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-light">Latest Posts</li>
+            <li class="list-group-item list-group-item-light">Announcements</li>
+            <li class="list-group-item list-group-item-light">Calendars</li>
+            <li class="list-group-item list-group-item-light">etc</li>
+          </ul>
+        </p>
+     </div>
+   </body>
+   </html>
