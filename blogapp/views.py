@@ -4,6 +4,7 @@ from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 from .models import Post, Comment
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
+from django.db.models import Count
 from taggit.models import Tag
 
    
@@ -17,7 +18,7 @@ def home(request, tag_slug=None):
 		tag = get_object_or_404(Tag, slug=tag_slug)
 		object_list = object_list.filter(tags__in=[tag])
 
-	paginator = Paginator(object_list, 2) # 3 posts in each page
+	paginator = Paginator(object_list, 3) # 3 posts in each page
 	page = request.GET.get('page')
 	try:
 		posts = paginator.page(page)
@@ -45,12 +46,17 @@ def post_detail(request, year, month, day, post):
 	else:
 		comment_form = CommentForm()
 
+    # List of similar posts
+	post_tags_ids = post.tags.values_list('id', flat=True)
+	similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+	similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags','-publish')[:4]
+
 	context = {
-    	'post': post,
-    	'comments': comments, 
-    	'new_comment': new_comment, 
-    	'comment_form': comment_form
-    }
+		'post': post,
+		'comments': comments, 
+		'new_comment': new_comment, 
+		'comment_form': comment_form,
+		'similar_posts': similar_posts,}
 	return render(request,'blogapp/post/detail.html',context)
 
 def post_share(request, post_id):
@@ -65,7 +71,7 @@ def post_share(request, post_id):
 			subject = f"{cd['name']} recommends you read " f"{post.title}"
 			message = f"Read {post.title} at {post_url}\n\n" \
 				f"{cd['name']}\'s comments: {cd['comments']}"
-			send_mail(subject, message, 'sdamilare@gmail.com',[cd['to']])
+			send_mail(subject, message, 'testdamilare@gmail.com',[cd['to']])
 			sent = True
 	else:
 		form = EmailPostForm()

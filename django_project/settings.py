@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '-u-140rk)^sd74$yij*q)^+vq^p0)v#!v#7+=_l1pr^#*!u(2d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['datablogapp.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['datablogapp.herokuapp.com', '127.0.0.1', 'localhost']
 
 # gmail smtp
 EMAIL_HOST = 'smtp.gmail.com'
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -129,3 +130,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#STATIC_ROOT = 'BASE_DIR / staticfiles'
+
+#STATICFILES_DIR = 'BASE_DIR /static'
+
+# Configure Django App for Heroku.
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#django_heroku.settings(locals())
