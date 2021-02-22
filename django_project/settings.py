@@ -131,11 +131,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-<<<<<<< HEAD
+#<<<<<<< HEAD
 
-#STATIC_ROOT = 'BASE_DIR / staticfiles'
+STATIC_ROOT = 'BASE_DIR / staticfiles'
 
-#STATICFILES_DIR = 'BASE_DIR /static'
+STATICFILES_DIR = 'BASE_DIR /static'
 
 # Configure Django App for Heroku.
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -144,4 +144,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'BASE_DIR / staticfiles'
 
 STATICFILES_DIR = 'BASE_DIR /static'
->>>>>>> f8965c56338dbc470c201a9137300133c65ef547
+#>>>>>>> f8965c56338dbc470c201a9137300133c65ef547
