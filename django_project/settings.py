@@ -136,7 +136,7 @@ STATICFILES_DIR = 'BASE_DIR /static'
 
 # Configure Django App for Heroku.
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 #=======
 #STATIC_ROOT = 'BASE_DIR / staticfiles'
 
